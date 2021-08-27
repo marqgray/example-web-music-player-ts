@@ -12,4 +12,16 @@ const app = new (class {
     title: <HTMLHeadingElement>document.getElementById("title"),
     cover: <HTMLImageElement>document.getElementById("cover"),
   };
+  songs: string[] = ["hey", "summer", "ukulele"];
+  songIndex: number = 2;
+
+  constructor() {
+    this.loadSong(this.songs[this.songIndex]);
+  }
+
+  loadSong(song: string) {
+    this.htmlElements.title.innerText = song;
+    this.htmlElements.audio.src = `music/${song}.mp3`;
+    this.htmlElements.cover.src = `images/${song}.jpg`;
+  }
 })();
