@@ -75,7 +75,7 @@ const app = new (class {
 
   nextSong() {
     this.songIndex++;
-    if (this.songIndex > this.songs.length - 2) {
+    if (this.songIndex > this.songs.length - 1) {
       this.songIndex = 0;
     }
     this.loadSong(this.songs[this.songIndex]);
