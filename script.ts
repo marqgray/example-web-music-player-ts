@@ -32,6 +32,9 @@ const app = new (class {
     this.htmlElements.nextButton.addEventListener("click", () => {
       this.nextSong();
     });
+    this.htmlElements.audio.addEventListener("timeupdate", (e) => {
+      this.updateProgress(e);
+    });
   }
 
   loadSong(song: string) {
@@ -80,5 +83,11 @@ const app = new (class {
     }
     this.loadSong(this.songs[this.songIndex]);
     this.playSong();
+  }
+
+  updateProgress(e: Event) {
+    const { duration, currentTime } = <HTMLAudioElement>e.target;
+    const progressPercent = (currentTime / duration) * 100;
+    this.htmlElements.progress.style.width = `${progressPercent}%`;
   }
 })();
