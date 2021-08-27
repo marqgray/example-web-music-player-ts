@@ -38,6 +38,9 @@ const app = new (class {
     this.htmlElements.progressContainer.addEventListener("click", (e) => {
       this.setProgress(e);
     });
+    this.htmlElements.audio.addEventListener("ended", () => {
+      this.nextSong();
+    });
   }
 
   loadSong(song: string) {
