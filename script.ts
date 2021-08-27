@@ -35,6 +35,9 @@ const app = new (class {
     this.htmlElements.audio.addEventListener("timeupdate", (e) => {
       this.updateProgress(e);
     });
+    this.htmlElements.progressContainer.addEventListener("click", (e) => {
+      this.setProgress(e);
+    });
   }
 
   loadSong(song: string) {
@@ -89,5 +92,14 @@ const app = new (class {
     const { duration, currentTime } = <HTMLAudioElement>e.target;
     const progressPercent = (currentTime / duration) * 100;
     this.htmlElements.progress.style.width = `${progressPercent}%`;
+  }
+
+  setProgress(e: MouseEvent) {
+    const target = <HTMLDivElement>e.target;
+    const width = target.clientWidth;
+    const clickX = e.offsetX;
+    const duration = this.htmlElements.audio.duration;
+
+    this.htmlElements.audio.currentTime = (clickX / width) * duration;
   }
 })();
