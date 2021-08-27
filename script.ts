@@ -26,6 +26,12 @@ const app = new (class {
         this.playSong();
       }
     });
+    this.htmlElements.previousButton.addEventListener("click", () => {
+      this.previousSong();
+    });
+    this.htmlElements.nextButton.addEventListener("click", () => {
+      this.nextSong();
+    });
   }
 
   loadSong(song: string) {
@@ -56,5 +62,23 @@ const app = new (class {
       .classList.remove("fa-pause");
 
     this.htmlElements.audio.pause();
+  }
+
+  previousSong() {
+    this.songIndex--;
+    if (this.songIndex < 0) {
+      this.songIndex = this.songs.length - 1;
+    }
+    this.loadSong(this.songs[this.songIndex]);
+    this.playSong();
+  }
+
+  nextSong() {
+    this.songIndex++;
+    if (this.songIndex > this.songs.length - 2) {
+      this.songIndex = 0;
+    }
+    this.loadSong(this.songs[this.songIndex]);
+    this.playSong();
   }
 })();
